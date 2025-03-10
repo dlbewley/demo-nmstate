@@ -6,3 +6,5 @@ namespace: openshift-nmstate
 
 resources:
   - nmstate.yaml
+  - role.yaml
+  - rolebinding.yaml
