@@ -1,18 +1,19 @@
-# oc create role metallb-mgr --verb='*' --resource=MetalLB -n metallb-system --dry-run=client -o yaml
 ---
+#oc create role nmstate-mgr --verb='*' --resource nncp,nmstateconfig --dry-run=client -o yaml
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
   name: nmstate-mgr
-  namespace: openshift-nmstate
 rules:
+- apiGroups:
+  - agent-install.openshift.io
+  resources:
+  - nmstateconfigs
+  verbs:
+  - '*'
 - apiGroups:
   - nmstate.io
   resources:
-  - nmstates
-  - nmstateconfigs
   - nodenetworkconfigurationpolicies
   verbs:
   - '*'
