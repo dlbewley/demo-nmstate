@@ -1,0 +1,19 @@
+---
+#oc create role nmstate-mgr --verb='*' --resource nncp,nmstateconfig --dry-run=client -o yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: nmstate-mgr
+rules:
+- apiGroups:
+  - agent-install.openshift.io
+  resources:
+  - nmstateconfigs
+  verbs:
+  - '*'
+- apiGroups:
+  - nmstate.io
+  resources:
+  - nodenetworkconfigurationpolicies
+  verbs:
+  - '*'

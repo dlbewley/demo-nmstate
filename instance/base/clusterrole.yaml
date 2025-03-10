@@ -1,0 +1,13 @@
+---
+# oc create clusterrole nmstate-mgr --verb='*' --resource NMstate --dry-run=client -o yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nmstate-mgr
+rules:
+- apiGroups:
+  - nmstate.io
+  resources:
+  - nmstates
+  verbs:
+  - '*'
