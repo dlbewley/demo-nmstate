@@ -1,13 +1,26 @@
 ---
-# oc create clusterrole nmstate-mgr --verb='*' --resource NMstate --dry-run=client -o yaml
+# oc create clusterrole nmstate-mgr --verb='*' --resource nmstate,nncp,nmstateconfig,net-attach-def --dry-run=client -o yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: nmstate-mgr
 rules:
 - apiGroups:
+  - agent-install.openshift.io
+  resources:
+  - nmstateconfigs
+  verbs:
+  - '*'
+- apiGroups:
+  - k8s.cni.cncf.io
+  resources:
+  - network-attachment-definitions
+  verbs:
+  - '*'
+- apiGroups:
   - nmstate.io
   resources:
   - nmstates
+  - nodenetworkconfigurationpolicies
   verbs:
   - '*'
